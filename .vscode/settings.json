@@ -1,0 +1,61 @@
+{
+  "hidefiles.configurationType": "local",
+  "hidefiles.globalConfig": {
+    "profiles": [
+      {
+        "name": "Default",
+        "detail": "",
+        "description": "Test",
+        "hidden": [
+          ".vscode/",
+          ".turbo/",
+          "node_modules/",
+          ".npmrc",
+          "LICENSE",
+          "package-lock.json",
+          "README.md",
+          "turbo.json",
+          "packages/ui/node_modules/",
+          "apps/web/.next/",
+          "apps/web/node_modules/",
+          "apps/web/eslint.config.mjs",
+          "apps/web/next-env.d.ts",
+          "apps/web/next.config.ts",
+          "apps/web/postcss.config.mjs",
+          "apps/web/README.md"
+        ]
+      },
+      {
+        "name": "Strict",
+        "detail": "Hide everything not immediately required",
+        "hidden": [
+          "$Default"
+        ]
+      }
+    ]
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    ".vscode/": true,
+    ".turbo/": true,
+    "node_modules/": true,
+    ".npmrc": true,
+    "LICENSE": true,
+    "package-lock.json": true,
+    "README.md": true,
+    "turbo.json": true,
+    "packages/ui/node_modules/": true,
+    "apps/web/.next/": true,
+    "apps/web/node_modules/": true,
+    "apps/web/eslint.config.mjs": true,
+    "apps/web/next-env.d.ts": true,
+    "apps/web/next.config.ts": true,
+    "apps/web/postcss.config.mjs": true,
+    "apps/web/README.md": true
+  },
+  "hidefiles.selectedProfile": "Default"
+}

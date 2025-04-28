@@ -1,8 +1,10 @@
 
+import Btn from '@ethera/ui/Button'
+
 export default function Home() {
   return (
-    <div>
-      shashwat
+    <div className=''>
+      <Btn />
     </div>
   );
 }
