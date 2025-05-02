@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+
 import "./globals.css";
+import { DM_Sans } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 
 const dmSans = DM_Sans({
@@ -20,9 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${dmSans.variable} font-dm-sans antialiased`}
-      >
+      <body className={`${dmSans.variable} font-dm-sans antialiased customThinScrollbar`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           {children}
         </ThemeProvider>
