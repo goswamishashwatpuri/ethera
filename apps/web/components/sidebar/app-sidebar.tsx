@@ -133,7 +133,9 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="icon" variant="inset" {...props}>
+    <Sidebar collapsible="icon" variant="inset" {...props}
+      className="[&>*]:bg-transparent"
+    >
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -143,8 +145,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <Command className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">Ethera</span>
-                  <span className="truncate text-xs text-muted-foreground">UI blocks you'd love</span>
+                  <span className="truncate font-semibold">ethera</span>
+                  <span className="truncate text-xs text-foreground/50">UI blocks you'd love</span>
                 </div>
               </a>
             </SidebarMenuButton>

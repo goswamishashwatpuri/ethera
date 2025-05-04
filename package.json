@@ -21,6 +21,8 @@
     "packages/*"
   ],
   "dependencies": {
-    "class-variance-authority": "^0.7.1"
+    "@types/react-syntax-highlighter": "^15.5.13",
+    "class-variance-authority": "^0.7.1",
+    "react-syntax-highlighter": "^15.6.1"
   }
 }

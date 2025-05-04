@@ -8,10 +8,10 @@ function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false)
   useEffect(() => { setMounted(true) }, [])
-
   if (!mounted) return null
+
   return (
-    <button className="flex p-1 items-center bg-secondary rounded-full shadow-md"
+    <button className="flex p-1 items-center bg-secondary rounded-full shadow-sm shadow-primary/60"
       onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
     >
       <span

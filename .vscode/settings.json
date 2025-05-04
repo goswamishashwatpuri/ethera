@@ -39,7 +39,23 @@
     "**/.svn": true,
     "**/.hg": true,
     "**/CVS": true,
-    "**/.DS_Store": true
+    "**/.DS_Store": true,
+    ".vscode/": true,
+    ".turbo/": true,
+    "node_modules/": true,
+    ".npmrc": true,
+    "LICENSE": true,
+    "package-lock.json": true,
+    "README.md": true,
+    "turbo.json": true,
+    "packages/ui/node_modules/": true,
+    "apps/web/.next/": true,
+    "apps/web/node_modules/": true,
+    "apps/web/eslint.config.mjs": true,
+    "apps/web/next-env.d.ts": true,
+    "apps/web/next.config.ts": true,
+    "apps/web/postcss.config.mjs": true,
+    "apps/web/README.md": true
   },
-  "hidefiles.selectedProfile": "Show All Files"
+  "hidefiles.selectedProfile": "Default"
 }
