@@ -5,19 +5,16 @@ import {
 import { AppSidebar } from "@/components/sidebar/app-sidebar"
 import TopNavbar from "@/components/top-navbar"
 
-export default function Layout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <SidebarProvider className="bg-gradient-to-l from-primary-gradient/80 to-background">
-      {/* <div className="fixed inset-0 z-0 bg-gradient-to-t from-background to-50% to-transparent pointer-events-none" /> */}
+    <SidebarProvider className="bg-gradient-to-l from-primary-gradient/80 to-background ">
+      {/* <div className="fixed w-full h-[20%] z-0 bg-gradient-to-b from-background to-transparent pointer-events-none" /> */}
+      <div className="fixed w-full h-[20%] bottom-0 z-0 bg-gradient-to-t from-background to-transparent pointer-events-none" />
       <div
-        className="fixed z-0 w-[300px] h-[300px] animate-float pointer-events-none"
+        className="fixed z-0 w-[300px] h-[300px] rounded-full animate-float pointer-events-none"
         style={{
-          background: 'radial-gradient(circle at center, rgba(60, 159, 251, 0.25) 0%, rgba(72, 189, 236, 0.29) 100%)',
-          filter: 'blur(150px)',
+          background: 'radial-gradient(circle at center, rgba(0, 99, 138, 0.76) 0%, rgba(0, 64, 75, 0.22) 100%)',
+          filter: 'blur(95px)',
           left: '5%',
           top: '50%',
           animation: 'float 6s ease-in-out infinite',
@@ -26,9 +23,7 @@ export default function Layout({
       <AppSidebar />
       <SidebarInset className="bg-background">
         <TopNavbar />
-        <div className="p-4">
           {children}
-        </div>
       </SidebarInset>
     </SidebarProvider>
   );

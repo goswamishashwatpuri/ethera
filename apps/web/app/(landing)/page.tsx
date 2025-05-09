@@ -28,7 +28,7 @@ const cards = [
   }
 ]
 
-function Page() {
+const Page = (): React.ReactNode => {
   return (
     <div>
 
@@ -162,4 +162,4 @@ function Page() {
   )
 }
 
-export default Page
+export default Page;

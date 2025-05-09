@@ -1,35 +1,34 @@
-import React from 'react'
+'use client'
+import { useState } from 'react'
 import Link from 'next/link'
 
-type Props = {}
+type Props = {
+  tableOfContentsArray: {
+    name: string
+    slug: string
+  }[]
+}
 
-function ContentsSidebar({ }: Props) {
+function ContentsSidebar({ tableOfContentsArray }: Props) {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
   return (
-    <ul>
-      <h2 className='text-foreground text-sm mb-2'>On This Page</h2>
-      <li>
-        <Link href="#" className='py-1 flex gap-2 h-full border-l border-primary'>
-          <label className='ml-2 underline underline-offset-4 text-foreground text-sm'>Shshwat</label>
-        </Link>
-        <Link href="#" className='ml-2 py-1 flex gap-2 h-full border-l border-primary'>
-          <label className='ml-2 underline underline-offset-4 text-foreground text-xs'>Shshwat</label>
-        </Link>
-        <Link href="#" className='ml-2 py-1 flex gap-2 h-full border-l border-primary'>
-          <label className='ml-2 underline underline-offset-4 text-foreground text-xs'>Shshwat</label>
-        </Link>
-      </li>
-      <li>
-        <Link href="#" className='py-1 flex gap-2 h-full border-l border-primary'>
-          <label className='ml-2 underline underline-offset-4 text-muted-foreground text-sm'>Shshwat</label>
-        </Link>
-      </li>
-      <li>
-        <Link href="#" className='py-1 flex gap-2 h-full border-l border-primary'>
-          <label className='ml-2 underline underline-offset-4 text-muted-foreground text-sm'>Shshwat</label>
-        </Link>
-      </li>
-
-    </ul>
+    <div className='place-self-end sticky top-10'>
+      <h2 className='text-foreground text-lg mb-4 font-medium'>On This Page</h2>
+      <ul>
+        {tableOfContentsArray.map((item, index) => (
+          <li key={index}
+            className='mb-1 hover:cursor-pointer'
+            onClick={() => setActiveIndex(index)}
+          >
+            <Link href={`#${item.slug}`}>
+              <label className={`text-foreground ${index === activeIndex ? 'text-foreground' : 'text-muted-foreground'} hover:cursor-pointer`}>
+                {item.name}
+              </label>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 

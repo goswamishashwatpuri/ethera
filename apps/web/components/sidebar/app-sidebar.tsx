@@ -2,18 +2,18 @@
 
 import * as React from "react"
 import {
-  BookOpen,
-  Bot,
   Command,
   Send,
   Github,
-  Settings2,
-  SquareTerminal,
+  Boxes,
+  Box,
+  Lightbulb,
+  Twitter,
 } from "lucide-react"
 
 import { NavMain } from "@/components/sidebar/nav-main"
-import { NavSecondary } from "@/components/sidebar/nav-secondary"
-// import { NavUser } from "@/components/sidebar/nav-user"
+import { NavFooter } from "@/components/sidebar/nav-secondary"
+
 import {
   Sidebar,
   SidebarContent,
@@ -24,114 +24,50 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
-const data = {
-  user: {
-    name: "Ethera",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  navMain: [
-    {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  navSecondary: [
-    {
-      title: "GitHub",
-      url: "https://github.com/shashwatpuri/ethera",
-      icon: Github,
-    },
-    {
-      title: "X",
-      url: "#",
-      icon: Send,
-    },
-  ]
-}
+import { SidebarSection, SidebarSectionItem } from "@/lib/types"
+import { getBlocksRegistry } from "@/actions/registry-actions"
+import { usePathname } from "next/navigation"
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
+  const pathname = usePathname()
+  // sync function loading data from action.
+  const blocksRegistry = getBlocksRegistry()
+  const data = {
+    navSections: [
+      {
+        sectionName: "Blocks",
+        sectionSlug: "blocks",
+        sectionIcon: Boxes,
+        items: blocksRegistry as SidebarSectionItem[],
+        isActive: pathname.includes("blocks")
+      },
+      {
+        sectionName: "Components",
+        sectionSlug: "components",
+        sectionIcon: Box,
+        items: blocksRegistry as SidebarSectionItem[],
+        isActive: pathname.includes("components")
+      },
+      {
+        sectionName: "Inspiration",
+        sectionSlug: "inspiration",
+        sectionIcon: Lightbulb,
+        isActive: pathname.includes("inspiration"),
+      },
+    ] as SidebarSection[],
+    navFooter: [
+      {
+        title: "Contribute on GitHub",
+        url: "https://github.com/shashwatpuri/ethera",
+        icon: Github,
+      },
+      {
+        title: "X @WhyShashwat",
+        url: "https://x.com/WhyShashwat",
+        icon: Twitter,
+      },
+    ]
+  }
   return (
     <Sidebar collapsible="icon" variant="inset" {...props}
       className="[&>*]:bg-transparent"
@@ -139,8 +75,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <a href="#">
+            <SidebarMenuButton size="lg" asChild className="hover:bg-transparent">
+              <a href="/">
                 <div className="bg-muted text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                   <Command className="size-4" />
                 </div>
@@ -154,12 +90,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent className="customThinScrollbar">
-        <NavMain items={data.navMain} />
-        {/* <NavProjects projects={data.projects} /> */}
+        <NavMain navMainData={data.navSections} />
       </SidebarContent>
       <SidebarFooter>
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
-        {/* <NavUser user={data.user} /> */}
+        <NavFooter items={data.navFooter} className="mt-auto" />
       </SidebarFooter>
     </Sidebar>
   )

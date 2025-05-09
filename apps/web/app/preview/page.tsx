@@ -1,20 +1,16 @@
-import Hero from '@/app/(landing)/page'
-// import { useSearchParams } from 'next/navigation'
-
-const components = {
-  "Hero": Hero
-
-}
+import { notFound } from "next/navigation";
+import { getComponentPathUsingSlug } from "@/actions/registry-actions";
 
 export default async function Preview({ searchParams }: any) {
-  const componentName = await searchParams?.component
-  const Component = components[componentName as keyof typeof components]
-  if (!Component) {
-    return <div>Component not found</div>
-  }
+  const pageSlug = (await searchParams)?.pageSlug ?? null
+  const variantSlug = (await searchParams)?.variantSlug ?? null
+
+  const componentReference = getComponentPathUsingSlug(pageSlug, variantSlug)
+
+  if (!componentReference) return notFound();
+  const Component = (await componentReference())?.default
+
   return (
-    <div>
-      <Component />
-    </div>
+    <Component />
   )
 }

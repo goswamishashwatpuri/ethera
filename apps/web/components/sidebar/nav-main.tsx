@@ -1,7 +1,7 @@
 "use client"
 
+import { useState } from "react"
 import { ChevronRight, type LucideIcon } from "lucide-react"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import {
   Collapsible,
   CollapsibleContent,
@@ -18,60 +18,77 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
-
-export function NavMain({
-  items,
-}: {
-  items: {
-    title: string
-    url: string
-    icon: LucideIcon
-    isActive?: boolean
+import { usePathname } from "next/navigation"
+type NavMainDataType = {
+  navMainData: Array<{
+    sectionName: string
+    sectionSlug: string
+    sectionIcon: LucideIcon
+    isActive: boolean
     items?: {
-      title: string
-      url: string
+      name: string
+      slug: string
     }[]
-  }[]
-}) {
+  }>
+}
+
+export function NavMain({ navMainData }: NavMainDataType) {
+  const pathname = usePathname()
+
   return (
     <SidebarGroup>
       {/* <SidebarGroupLabel>Platform</SidebarGroupLabel> */}
       <SidebarMenu>
-          {items.map((item) => (
-            <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
+        {navMainData.map((section) => {
+          const [isOpen, setIsOpen] = useState(false)
+          return (
+            <Collapsible key={section.sectionName} asChild
+              defaultOpen={section.isActive}
+            >
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip={item.title}>
-                  <a href={item.url}>
-                    <item.icon />
-                    <span>{item.title}</span>
-                  </a>
-                </SidebarMenuButton>
-                {item.items?.length ? (
-                  <>
+                <div
+                  className={`group sticky top-0 z-10 rounded-md 
+                    ${(pathname.includes(section.sectionSlug) || isOpen) ? "bg-background bg-gradient-to-r from-primary/20 to-primary-gradient/30" : ""}`}
+                >
+                  <SidebarMenuButton asChild tooltip={section.sectionName} >
+                    <a href={`/${section.sectionSlug}`}>
+                      <section.sectionIcon />
+                      <span>{section.sectionName}</span>
+                    </a>
+                  </SidebarMenuButton>
+                  {section.items?.length && (
                     <CollapsibleTrigger asChild>
-                      <SidebarMenuAction className="data-[state=open]:rotate-90">
+                      <SidebarMenuAction
+                        className="data-[state=open]:rotate-90"
+                        onClick={() => setIsOpen((prev) => !prev)}
+                      >
                         <ChevronRight />
                         <span className="sr-only">Toggle</span>
                       </SidebarMenuAction>
                     </CollapsibleTrigger>
-                    <CollapsibleContent>
+                  )}
+                </div>
+                {section.items?.length ? (
+                  <CollapsibleContent>
+                    {section.items?.length && (
                       <SidebarMenuSub>
-                        {item.items?.map((subItem) => (
-                          <SidebarMenuSubItem key={subItem.title}>
+                        {section.items?.map((subItem) => (
+                          <SidebarMenuSubItem key={subItem.name}>
                             <SidebarMenuSubButton asChild>
-                              <a href={subItem.url}>
-                                <span>{subItem.title}</span>
+                              <a href={`/${section.sectionSlug}/${subItem.slug}`}>
+                                <span>{subItem.name}</span>
                               </a>
                             </SidebarMenuSubButton>
                           </SidebarMenuSubItem>
                         ))}
                       </SidebarMenuSub>
-                    </CollapsibleContent>
-                  </>
+                    )}
+                  </CollapsibleContent>
                 ) : null}
               </SidebarMenuItem>
             </Collapsible>
-          ))}
+          )
+        })}
       </SidebarMenu>
     </SidebarGroup>
   )
