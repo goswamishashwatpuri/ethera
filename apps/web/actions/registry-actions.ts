@@ -3,6 +3,7 @@ import {
   globalRegistry
 } from "@/lib/data/registry"
 import { pageDataRegistry } from "@/lib/data/pageDataRegistry"
+import { pageData } from "@/lib/types"
 
 export const getBlocksRegistry = () => {
   return blocksRegistry
@@ -25,7 +26,7 @@ export const getComponentPathUsingSlug = (itemSlug: string, variantSlug: string)
 export const getDataFromPageDataRegistry = (itemSlug: string) => {
   const item = pageDataRegistry[itemSlug]
   if (!item) return null
-  return item
+  return item as pageData
 }
 
 

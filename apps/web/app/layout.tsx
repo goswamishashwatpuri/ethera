@@ -10,7 +10,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Ethera UI",
+  title: "ethera",
   description: "Ethera UI",
 };
 

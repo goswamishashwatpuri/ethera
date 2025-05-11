@@ -14,7 +14,6 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  /* --primary: oklch(0.205 0 0); */
   --primary: #4bbcfd;
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
@@ -40,6 +39,7 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --syntax-background: rgb(7, 16, 25);
 }
 
 .dark {
@@ -79,6 +79,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --syntax-background: rgb(7, 16, 25);
 }
 
 @theme inline {
@@ -146,15 +147,19 @@
   0% {
     transform: translateY(0px) translateX(0px) rotate(0deg);
   }
+
   25% {
     transform: translateY(-100px) translateX(30px) rotate(8deg) scale(1.5);
   }
+
   50% {
     transform: translateY(-30px) translateX(-30px) rotate(-8deg) scale(1.2);
   }
+
   75% {
     transform: translateY(-60px) translateX(30px) rotate(5deg);
   }
+
   100% {
     transform: translateY(0px) translateX(0px) rotate(0deg);
   }

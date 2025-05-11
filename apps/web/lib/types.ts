@@ -44,10 +44,16 @@ export type pageData = {
   name: string
   slug: string
   thumbnail?: string
+  pageTitle: string
+  description: string
   variantSections: Record<string, {
     name: string
     slug: string
+    title: string
+    description: string
     importComponentPath: () => Promise<{ default: React.ComponentType<any>;[key: string]: any }>;
-    code: string
+    usageCode: string
+    dependencies: string
+    sourceCode: string
   }>
 }
